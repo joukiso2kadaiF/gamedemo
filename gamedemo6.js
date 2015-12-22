@@ -25,21 +25,13 @@ function draw() {
 }
 
 function field() {
-
-  for (var i = 0; i < 51; i++) {    //縦線を繰り返しで描画
-    line(25*i,0,25*i,750);
-  }
-  for (var i = 0; i < 31; i++) {    //横線を繰り返しで描画
-    line(0,25*i,1250,25*i);
-  }
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
       if (fieldarray[i][j] == 1) {
         image(block,j*25,i*25);
-        //fill(179,92,12,256);
-        //rect(j*25,i*25,25,25);
       }else {
         fill(0,200,256,256);
+        noStroke();
         rect(j*25,i*25,25,25);
       }
     }
@@ -58,6 +50,7 @@ for (var i = 0; i < 30; i++) {
 var k,l;
 for (var k = 0; k < 30; k++) {
   fieldarray[k][0] = 1;
+  fieldarray[k][20] = 1;
   fieldarray[k][49] = 1;
 }
 for (var l = 0; l < 50; l++) {

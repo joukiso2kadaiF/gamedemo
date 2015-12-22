@@ -54,6 +54,7 @@ for (var i = 0; i < 30; i++) {
 var k,l;
 for (var k = 0; k < 30; k++) {
   fieldarray[k][0] = 1;
+  fieldarray[k][20] = 1;
   fieldarray[k][49] = 1;
 }
 for (var l = 0; l < 50; l++) {
