@@ -3,7 +3,7 @@ var a;
 var over = 0;
 var ms1,ms2,keika;
 var i = 0;
-var b;
+
 
 function setup(){
   canvas = createCanvas(window.innerWidth,
