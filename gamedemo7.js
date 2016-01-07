@@ -157,7 +157,6 @@ fieldarray = [
 function keyPressed() {
   if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
     movejiki();
-    //moveteki();
   }
 }
 
@@ -184,6 +183,7 @@ function movejiki() {
 }
 
 //〜敵機について〜
+//〜敵についてのデータ配列〜
 var teki = new Array();
 teki = [[25,100],[1100,650],[25,600],[1000,300]];
 
@@ -192,10 +192,6 @@ function tekid() {
   for (var i = 0; i < 4; i++) {
     rect(teki[i][0],teki[i][1],25,25);
   }
-  // rect(teki[0][0],teki[0][1],25,25);
-  // rect(teki[1][0],teki[1][1],25,25);
-  // rect(teki[2][0],teki[2][1],25,25);
-  // rect(teki[3][0],teki[3][1],25,25);
 }
 
 function moveteki() {
@@ -259,7 +255,6 @@ function timecount() {
   if (i > 20) {
     i = 0;
     moveteki2();
-    //moveteki2();
   } else {
     i += 1;
     tekid();
@@ -328,15 +323,13 @@ function positionreset() {
 
 //ゲームオーバーについて
 function istouchedteki() {
-  var kyoriX2,kyoriY2,kyoriXX2,kyoriYY2;
-  kyoriX2 = kyori(teki[0][0],jikiX);
-  kyoriY2 = kyori(teki[0][1],jikiY);
-  kyoriXX2 = kyori(teki[1][0],jikiX);
-  kyoriYY2 = kyori(teki[1][1],jikiY);
-  if (kyoriX2 + kyoriY2 <= 25) {
-    over = 256;
-  }else if (kyoriXX2 + kyoriYY2 <= 25) {
-    over = 256;
+  var kyoriX2,kyoriY2
+  for (var i = 0; i < 4; i++) {
+    kyoriX2 = kyori(teki[i][0],jikiX);
+    kyoriY2 = kyori(teki[i][1],jikiY);
+    if (kyoriX2 + kyoriY2 <= 25) {
+      over = 256;
+    }
   }
 }
 function gameover() {
