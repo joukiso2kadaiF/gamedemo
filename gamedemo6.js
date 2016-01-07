@@ -17,6 +17,7 @@ function setup(){
   block = loadImage("sozaiquus_block06sq.gif");
   shibahu = loadImage("sibahu.gif");
   goal1 = loadImage("s_goal.jpg");//http://free-illustrations.gatag.net/tag/%E5%85%A5%E3%82%8A%E5%8F%A3
+
 }
 
 function draw() {
