@@ -1,4 +1,9 @@
+body{
+    background-image:url(haikei.gif);
+    background-repeat:no-repeat;
+
+}
 
 .position{
-  text-align : center ;   
+  text-align : center ;
 }
