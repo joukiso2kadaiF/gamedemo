@@ -4,6 +4,7 @@ var over = 0;
 var ms1,ms2,keika;
 var i = 0;
 var block,shibahu;
+var h,i,j;
 
 
 function setup(){
@@ -15,7 +16,7 @@ function setup(){
   rock = loadImage("rock2.gif");
   block = loadImage("sozaiquus_block06sq.gif");
   shibahu = loadImage("sibahu.gif");
-  goal = loadImage("s_goal.jpg");//http://free-illustrations.gatag.net/tag/%E5%85%A5%E3%82%8A%E5%8F%A3
+  goal1 = loadImage("s_goal.jpg");//http://free-illustrations.gatag.net/tag/%E5%85%A5%E3%82%8A%E5%8F%A3
 }
 
 function draw() {
@@ -28,14 +29,14 @@ function draw() {
 }
 
 function field() {
-  h = 0;
+  h = 1;
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
       if (fieldarray[h][i][j] == 1) {
         image(rock,j*25,i*25);
       }
       else if(fieldarray[h][i][j] == 2){
-        image(s_goal,j*25,i*25);
+        image(goal1,j*25,i*25);
       }else {
         image(shibahu,j*25,i*25);
       }
@@ -43,17 +44,16 @@ function field() {
   }
 }
 //フィールド三次配列
-var h,i,j;
 var fieldarray = new Array();
-for (var h = 0; h < 3; i++) {
-fieldarray[h] = new Array();
-  for (var i = 0; i < 30; i++) {
-  fieldarray[i] = new Array();
-    for (var j = 0; j < 50; j++) {
-      fieldarray[i][j] = 0;
-    }
-  }
-}
+//for (var h = 0; h < 2; i++) {
+//fieldarray[h] = new Array();
+//  for (var i = 0; i < 30; i++) {
+//  fieldarray[i] = new Array();
+//    for (var j = 0; j < 50; j++) {
+//      fieldarray[h][i][j] = 0;
+//    }
+//  }
+//}
 
 fieldarray = [
   [
@@ -87,8 +87,7 @@ fieldarray = [
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ],
-  [
+  ],[
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -119,8 +118,7 @@ fieldarray = [
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ],
-  [
+  ],[
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -274,7 +272,7 @@ function timecount() {
 function atariup(hanteichiX,hanteichiY) {
   var hairetuX = (hanteichiX/25);
   var hairetuY = (hanteichiY/25);
-  if (fieldarray[hairetuY - 1][hairetuX] != 1) {
+  if (fieldarray[h][hairetuY - 1][hairetuX] != 1) {
     return hanteichiY -= 25;
   }else {
     return hanteichiY;
@@ -283,7 +281,7 @@ function atariup(hanteichiX,hanteichiY) {
 function ataridown(hanteichiX,hanteichiY) {
   var hairetuX = (hanteichiX/25);
   var hairetuY = (hanteichiY/25);
-  if (fieldarray[hairetuY + 1][hairetuX] != 1) {
+  if (fieldarray[h][hairetuY + 1][hairetuX] != 1) {
     return hanteichiY += 25;
   }else {
     return hanteichiY;
@@ -292,7 +290,7 @@ function ataridown(hanteichiX,hanteichiY) {
 function atarileft(hanteichiX,hanteichiY) {
   var hairetuX = (hanteichiX/25);
   var hairetuY = (hanteichiY/25);
-  if (fieldarray[hairetuY][hairetuX - 1] != 1) {
+  if (fieldarray[h][hairetuY][hairetuX - 1] != 1) {
     return hanteichiX -= 25;
   }else {
     return hanteichiX;
@@ -301,7 +299,7 @@ function atarileft(hanteichiX,hanteichiY) {
 function atariright(hanteichiX,hanteichiY) {
   var hairetuX = (hanteichiX/25);
   var hairetuY = (hanteichiY/25);
-  if (fieldarray[hairetuY][hairetuX + 1] != 1) {
+  if (fieldarray[h][hairetuY][hairetuX + 1] != 1) {
     return hanteichiX += 25;
   }else {
     return hanteichiX;
