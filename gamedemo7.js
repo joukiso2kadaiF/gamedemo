@@ -83,7 +83,7 @@ fieldarray = [
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
@@ -184,77 +184,85 @@ function movejiki() {
 }
 
 //〜敵機について〜
-var tekiX = 25;
-var tekiY = 100;
-var tekiXX = 1100;
-var tekiYY = 650;
-var random;
-function teki() {
+var teki = new Array();
+teki = [[25,100],[1100,650],[25,600],[1000,300]];
+
+function tekid() {
   fill(256,256,50,256);
-  rect(tekiX,tekiY,25,25);
-  rect(tekiXX,tekiYY,25,25);
+  for (var i = 0; i < 4; i++) {
+    rect(teki[i][0],teki[i][1],25,25);
+  }
+  // rect(teki[0][0],teki[0][1],25,25);
+  // rect(teki[1][0],teki[1][1],25,25);
+  // rect(teki[2][0],teki[2][1],25,25);
+  // rect(teki[3][0],teki[3][1],25,25);
 }
 
-function moveteki1() {
-  random = Math.floor(Math.random()*2);
-  var kyoriX,kyoriY;
-  kyoriX = kyori(tekiX,jikiX);
-  kyoriY = kyori(tekiY,jikiY);
-  if (kyoriX < kyoriY && tekiY <= jikiY) {
-    tekiY = ataridown(tekiX,tekiY);
-  }else if (kyoriX < kyoriY && jikiY <= tekiY) {
-    tekiY = atariup(tekiX,tekiY);
-  }else if (kyoriY < kyoriX && tekiX <= jikiX) {
-    tekiX = atariright(tekiX,tekiY);
-  }else if (kyoriY < kyoriX && jikiX <= tekiX) {
-    tekiX = atarileft(tekiX,tekiY);
-  }else if (kyoriX == kyoriY) {
-    if (random == 0 && tekiY <= jikiY) {
-      tekiY = ataridown(tekiX,tekiY);
-    }else if (random == 0 && jikiY <= tekiY) {
-      tekiY = atariup(tekiX,tekiY);
-    }else if (random == 1 && tekiX <= jikiX) {
-      tekiX = atariright(tekiX,tekiY);
-    }else if (random == 1 && jikiX <= tekiX) {
-      tekiX = atarileft(tekiX,tekiY);
+function moveteki() {
+  for (var i = 0; i < 4; i++) {
+    random = Math.floor(Math.random()*2);
+    var kyoriX,kyoriY;
+    kyoriX = kyori(teki[i][0],jikiX);
+    kyoriY = kyori(teki[i][1],jikiY);
+    if (kyoriX < kyoriY && teki[i][1]<= jikiY) {
+      teki[i][1] = ataridown(teki[i][0],teki[i][1]);
+    }else if (kyoriX < kyoriY && jikiY <= teki[i][1]) {
+      teki[i][1] = atariup(teki[i][0],teki[i][1]);
+    }else if (kyoriY < kyoriX && teki[i][0] <= jikiX) {
+      teki[i][0] = atariright(teki[i][0],teki[i][1]);
+    }else if (kyoriY < kyoriX && jikiX <= teki[i][0]) {
+      teki[i][0] = atarileft(teki[i][0],teki[i][1]);
+    }else if (kyoriX == kyoriY) {
+      if (random == 0 && teki[i][1] <= jikiY) {
+        teki[i][1] = ataridown(teki[i][0],teki[i][1]);
+      }else if (random == 0 && jikiY <= teki[i][1]) {
+        teki[i][1] = atariup(teki[i][0],teki[i][1]);
+      }else if (random == 1 && teki[i][0] <= jikiX) {
+        teki[i][0] = atariright(teki[i][0],teki[i][1]);
+      }else if (random == 1 && jikiX <= teki[i][0]) {
+        teki[i][0] = atarileft(teki[i][0],teki[i][1]);
+      }
     }
   }
 }
 
 function moveteki2() {
-  random = Math.floor(Math.random()*2);
-  var kyoriXX,kyoriYY;
-  kyoriXX = kyori(tekiXX,jikiX);
-  kyoriYY = kyori(tekiYY,jikiY);
-  if (kyoriXX < kyoriYY && tekiYY <= jikiY) {
-     tekiYY += 25;
-  }else if (kyoriXX < kyoriYY && jikiY <= tekiYY) {
-     tekiYY -= 25;
-  }else if (kyoriYY < kyoriXX && tekiXX <= jikiX) {
-     tekiXX += 25;
-  }else if (kyoriYY < kyoriXX && jikiX <= tekiXX) {
-     tekiXX -= 25;
-  }else if (kyoriXX == kyoriYY) {
-    if (random == 0 && tekiYY <= jikiY) {
-       tekiYY += 25;
-    }else if (random == 0 && jikiY <= tekiYY) {
-       tekiYY -= 25;
-    }else if (random == 1 && tekiXX <= jikiX) {
-       tekiXX += 25;
-    }else if (random == 1 && jikiX <= tekiXX) {
-       tekiXX -= 25;
+  for (var i = 0; i < 4; i++) {
+    random = Math.floor(Math.random()*2);
+    var kyoriX,kyoriY;
+    kyoriX = kyori(teki[i][0],jikiX);
+    kyoriY = kyori(teki[i][1],jikiY);
+    if (kyoriX < kyoriY && teki[i][1]<= jikiY) {
+      teki[i][1] += 25;
+    }else if (kyoriX < kyoriY && jikiY <= teki[i][1]) {
+      teki[i][1] -= 25;
+    }else if (kyoriY < kyoriX && teki[i][0] <= jikiX) {
+      teki[i][0] += 25;
+    }else if (kyoriY < kyoriX && jikiX <= teki[i][0]) {
+      teki[i][0] -= 25;
+    }else if (kyoriX == kyoriY) {
+      if (random == 0 && teki[i][1] <= jikiY) {
+        teki[i][1] += 25;
+      }else if (random == 0 && jikiY <= teki[i][1]) {
+        teki[i][1] -= 25;
+      }else if (random == 1 && teki[i][0] <= jikiX) {
+        teki[i][0] += 25;
+      }else if (random == 1 && jikiX <= teki[i][0]) {
+        teki[i][0] -= 25;
+      }
     }
   }
 }
 
+
 function timecount() {
   if (i > 20) {
     i = 0;
-    moveteki1();
     moveteki2();
+    //moveteki2();
   } else {
     i += 1;
-    teki();
+    tekid();
   }
 }
 
@@ -315,20 +323,16 @@ function goal(jikiX,jikiY) {
 function positionreset() {
   jikiX = 200;
   jikiY = 450;
-  tekiX = 25;
-  tekiY = 100;
-  tekiXX = 1100;
-  tekiYY = 650;
-
+  teki = [[25,100],[1100,650],[25,600],[1000,300]];
 }
 
 //ゲームオーバーについて
 function istouchedteki() {
   var kyoriX2,kyoriY2,kyoriXX2,kyoriYY2;
-  kyoriX2 = kyori(tekiX,jikiX);
-  kyoriY2 = kyori(tekiY,jikiY);
-  kyoriXX2 = kyori(tekiXX,jikiX);
-  kyoriYY2 = kyori(tekiYY,jikiY);
+  kyoriX2 = kyori(teki[0][0],jikiX);
+  kyoriY2 = kyori(teki[0][1],jikiY);
+  kyoriXX2 = kyori(teki[1][0],jikiX);
+  kyoriYY2 = kyori(teki[1][1],jikiY);
   if (kyoriX2 + kyoriY2 <= 25) {
     over = 256;
   }else if (kyoriXX2 + kyoriYY2 <= 25) {
