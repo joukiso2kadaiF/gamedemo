@@ -14,10 +14,10 @@ function setup(){
   canvas.canvas.style.height = null;
   canvas.canvas.style.width = null;
   colorMode(RGB,256);
-  rock = loadImage("rock2.gif");
-  block = loadImage("sozaiquus_block06sq.gif");
-  shibahu = loadImage("sibahu.gif");
-  goal1 = loadImage("goal2.gif");//http://free-illustrations.gatag.net/tag/%E5%85%A5%E3%82%8A%E5%8F%A3
+  rock = loadImage("picture/rock2.gif");
+  block = loadImage("picture/sozaiquus_block06sq.gif");
+  shibahu = loadImage("picture/sibahu.gif");
+  goal1 = loadImage("picture/goal2.gif");//http://free-illustrations.gatag.net/tag/%E5%85%A5%E3%82%8A%E5%8F%A3
 }
 
 function draw() {
