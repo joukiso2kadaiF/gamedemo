@@ -150,10 +150,6 @@ function keyPressed() {
 //〜自機について〜
 var jiki = new Array();
 jiki = [[200,450],[1000,50],[1000,600]];
-//jiki[h][0] jiki[h][0]
-//jiki[h][1] jiki[h][1]
-//var jiki[h][0] = 200;
-//var jiki[h][1] = 450;
 jikiOpacity = 256;
 function drawjiki() {
   fill(256,100,100,jikiOpacity);
@@ -175,17 +171,22 @@ function movejiki() {
   }
 }
 
+
 //〜敵機について〜
 //〜敵についてのデータ配列〜
 var teki = new Array();
-teki = [[25,100],[1100,650],[25,600],[1000,300]];
+teki = [
+        [[25,100],[1100,650],[25,600],[1000,300]],
+        [[25,100],[25,650],[25,600],[1000,300]],
+        [[25,100],[1100,650],[25,600],[1000,300]]
+       ];
 tekiopacity = 256;
 
 function drawteki() {
   fill(256,256,50,tekiopacity);
   noStroke();
   for (var i = 0; i < 4; i++) {
-    rect(teki[i][0],teki[i][1],25,25);
+    rect(teki[h][i][0],teki[h][i][1],25,25);
   }
 }
 
@@ -193,25 +194,25 @@ function moveteki() {
   for (var i = 0; i < 4; i++) {
     random = Math.floor(Math.random()*2);
     var kyoriX,kyoriY;
-    kyoriX = kyori(teki[i][0],jiki[h][0]);
-    kyoriY = kyori(teki[i][1],jiki[h][1]);
-    if (kyoriX < kyoriY && teki[i][1]<= jiki[h][1]) {
-      teki[i][1] = ataridown(teki[i][0],teki[i][1]);
-    }else if (kyoriX < kyoriY && jiki[h][1] <= teki[i][1]) {
-      teki[i][1] = atariup(teki[i][0],teki[i][1]);
-    }else if (kyoriY < kyoriX && teki[i][0] <= jiki[h][0]) {
-      teki[i][0] = atariright(teki[i][0],teki[i][1]);
-    }else if (kyoriY < kyoriX && jiki[h][0] <= teki[i][0]) {
-      teki[i][0] = atarileft(teki[i][0],teki[i][1]);
+    kyoriX = kyori(teki[h][i][0],jiki[h][0]);
+    kyoriY = kyori(teki[h][i][1],jiki[h][1]);
+    if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
+      teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
+    }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
+      teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
+    }else if (kyoriY < kyoriX && teki[h][i][0] <= jiki[h][0]) {
+      teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
+    }else if (kyoriY < kyoriX && jiki[h][0] <= teki[h][i][0]) {
+      teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
     }else if (kyoriX == kyoriY) {
-      if (random == 0 && teki[i][1] <= jiki[h][1]) {
-        teki[i][1] = ataridown(teki[i][0],teki[i][1]);
-      }else if (random == 0 && jiki[h][1] <= teki[i][1]) {
-        teki[i][1] = atariup(teki[i][0],teki[i][1]);
-      }else if (random == 1 && teki[i][0] <= jiki[h][0]) {
-        teki[i][0] = atariright(teki[i][0],teki[i][1]);
-      }else if (random == 1 && jiki[h][0] <= teki[i][0]) {
-        teki[i][0] = atarileft(teki[i][0],teki[i][1]);
+      if (random == 0 && teki[h][i][1] <= jiki[h][1]) {
+        teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
+      }else if (random == 0 && jiki[h][1] <= teki[h][i][1]) {
+        teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
+      }else if (random == 1 && teki[h][i][0] <= jiki[h][0]) {
+        teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
+      }else if (random == 1 && jiki[h][0] <= teki[h][i][0]) {
+        teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
       }
     }
   }
@@ -221,27 +222,27 @@ function moveteki2() {
   for (var i = 0; i < 4; i++) {
     random = Math.floor(Math.random()*2);
     var kyoriX,kyoriY;
-    kyoriX = kyori(teki[i][0],jiki[h][0]);
-    kyoriY = kyori(teki[i][1],jiki[h][1]);
-    kyuoriU = EuclideanDistance(jiki[h][0],jiki[h][1],teki[i][0],teki[i][1]) //敵と自機のユークリッド距離
+    kyoriX = kyori(teki[h][i][0],jiki[h][0]);
+    kyoriY = kyori(teki[h][i][1],jiki[h][1]);
+    kyuoriU = EuclideanDistance(jiki[h][0],jiki[h][1],teki[h][i][0],teki[h][i][1]) //敵と自機のユークリッド距離
     if (kyuoriU < 600) {　　//ユークリッド距離が600になったら動き出す。
-      if (kyoriX < kyoriY && teki[i][1]<= jiki[h][1]) {
-        teki[i][1] += 25;
-      }else if (kyoriX < kyoriY && jiki[h][1] <= teki[i][1]) {
-        teki[i][1] -= 25;
-      }else if (kyoriY < kyoriX && teki[i][0] <= jiki[h][0]) {
-        teki[i][0] += 25;
-      }else if (kyoriY < kyoriX && jiki[h][0] <= teki[i][0]) {
-        teki[i][0] -= 25;
+      if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
+        teki[h][i][1] += 25;
+      }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
+        teki[h][i][1] -= 25;
+      }else if (kyoriY < kyoriX && teki[h][i][0] <= jiki[h][0]) {
+        teki[h][i][0] += 25;
+      }else if (kyoriY < kyoriX && jiki[h][0] <= teki[h][i][0]) {
+        teki[h][i][0] -= 25;
       }else if (kyoriX == kyoriY) {
-        if (random == 0 && teki[i][1] <= jiki[h][1]) {
-          teki[i][1] += 25;
-        }else if (random == 0 && jiki[h][1] <= teki[i][1]) {
-          teki[i][1] -= 25;
-        }else if (random == 1 && teki[i][0] <= jiki[h][0]) {
-          teki[i][0] += 25;
-        }else if (random == 1 && jiki[h][0] <= teki[i][0]) {
-          teki[i][0] -= 25;
+        if (random == 0 && teki[h][i][1] <= jiki[h][1]) {
+          teki[h][i][1] += 25;
+        }else if (random == 0 && jiki[h][1] <= teki[h][i][1]) {
+          teki[h][i][1] -= 25;
+        }else if (random == 1 && teki[h][i][0] <= jiki[h][0]) {
+          teki[h][i][0] += 25;
+        }else if (random == 1 && jiki[h][0] <= teki[h][i][0]) {
+          teki[h][i][0] -= 25;
         }
       }
     }
@@ -317,7 +318,6 @@ function goal(jikiX,jikiY) {
     if (c > 60) {
       c = 0;
       h += 1;
-      positionreset();
       jikiOpacity = tekiopacity = 256;
     }else {
       t = 0;
@@ -327,17 +327,13 @@ function goal(jikiX,jikiY) {
   }
 }
 
-function positionreset() {
-  jiki = [[200,450],[1000,50],[1000,600]];
-  teki = [[25,100],[1100,650],[25,600],[1000,300]];
-}
 
 //ゲームオーバーについて
 function istouchedteki() {
   var kyoritjX,kyoritjY
   for (var i = 0; i < 4; i++) {
-    kyoritjX = kyori(teki[i][0],jiki[h][0]);
-    kyoritjY = kyori(teki[i][1],jiki[h][1]);
+    kyoritjX = kyori(teki[h][i][0],jiki[h][0]);
+    kyoritjY = kyori(teki[h][i][1],jiki[h][1]);
     if (kyoritjX + kyoritjY <= 25) {
       over = 256;
     }
