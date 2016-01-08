@@ -1,13 +1,6 @@
 var canvas;
-var a;
 var over = 0;
-var ms1,ms2,keika;
-var t = 0;
-var block,shibahu;
-var h,i,j;
 var jikiOpacity,tekiopacity;
-var c = 0;
-h = 0;
 
 
 function setup(){
@@ -24,39 +17,15 @@ function setup(){
 
 function draw() {
   field();    //フィールドを描画
-  jiki();   //自機の描画
+  drawjiki();   //自機の描画
   timecount();    //敵の移動のためのカウント。敵の動きを管理
   gameover();   //ゲームオーバーか判定
   istouchedteki();    //敵に追いつかれたか判定
   goal(jikiX,jikiY);   //ゴールに到達したかどうか判定
 }
 
-function field() {
-  for (var i = 0; i < 30; i++) {
-    for (var j = 0; j < 50; j++) {
-      if (fieldarray[h][i][j] == 1) {
-        image(rock,j*25,i*25);
-      }
-      else if(fieldarray[h][i][j] == 2){
-        image(goal1,j*25,i*25);
-      }else {
-        image(shibahu,j*25,i*25);
-      }
-    }
-  }
-}
 //フィールド三次配列
 var fieldarray = new Array();
-//for (var h = 0; h < 2; i++) {
-//fieldarray[h] = new Array();
-//  for (var i = 0; i < 30; i++) {
-//  fieldarray[i] = new Array();
-//    for (var j = 0; j < 50; j++) {
-//      fieldarray[h][i][j] = 0;
-//    }
-//  }
-//}
-
 fieldarray = [
   [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -154,6 +123,22 @@ fieldarray = [
   ]
 ];
 
+var h,i,j;
+h = 0;
+function field() {
+  for (var i = 0; i < 30; i++) {
+    for (var j = 0; j < 50; j++) {
+      if (fieldarray[h][i][j] == 1) {
+        image(rock,j*25,i*25);
+      }
+      else if(fieldarray[h][i][j] == 2){
+        image(goal1,j*25,i*25);
+      }else {
+        image(shibahu,j*25,i*25);
+      }
+    }
+  }
+}
 
 //キー押された時の動作をそれぞれ指定
 function keyPressed() {
@@ -163,10 +148,12 @@ function keyPressed() {
 }
 
 //〜自機について〜
+var jiki = new Array();
+jiki = [[25,100],[1100,650],[25,600],[1000,300]];
 var jikiX = 200;
 var jikiY = 450;
 jikiOpacity = 256;
-function jiki() {
+function drawjiki() {
   fill(256,100,100,jikiOpacity);
   noStroke();
   rect(jikiX,jikiY,25,25);
@@ -192,7 +179,7 @@ var teki = new Array();
 teki = [[25,100],[1100,650],[25,600],[1000,300]];
 tekiopacity = 256;
 
-function tekid() {
+function drawteki() {
   fill(256,256,50,tekiopacity);
   noStroke();
   for (var i = 0; i < 4; i++) {
@@ -234,8 +221,8 @@ function moveteki2() {
     var kyoriX,kyoriY;
     kyoriX = kyori(teki[i][0],jikiX);
     kyoriY = kyori(teki[i][1],jikiY);
-    kyuoriU = EuclideanDistance(jikiX,jikiY,teki[i][0],teki[i][1])
-    if (kyuoriU < 600) {
+    kyuoriU = EuclideanDistance(jikiX,jikiY,teki[i][0],teki[i][1]) //敵と自機のユークリッド距離
+    if (kyuoriU < 600) {　　//ユークリッド距離が600になったら動き出す。
       if (kyoriX < kyoriY && teki[i][1]<= jikiY) {
         teki[i][1] += 25;
       }else if (kyoriX < kyoriY && jikiY <= teki[i][1]) {
@@ -259,14 +246,15 @@ function moveteki2() {
   }
 }
 
-
+var t = 0;
 function timecount() {
   if (t > 20) {
     t = 0;
     moveteki2();
+    drawteki();
   } else {
     t += 1;
-    tekid();
+    drawteki();
   }
 }
 
@@ -319,6 +307,7 @@ function EuclideanDistance(x1,y1,x2,y2) {
 }
 
 //ゴールについて
+var c = 0;
 function goal(jikiX,jikiY) {
   var hairetuX2 = (jikiX/25);
   var hairetuY2 = (jikiY/25);
@@ -344,11 +333,11 @@ function positionreset() {
 
 //ゲームオーバーについて
 function istouchedteki() {
-  var kyoriX2,kyoriY2
+  var kyoritjX,kyoritjY
   for (var i = 0; i < 4; i++) {
-    kyoriX2 = kyori(teki[i][0],jikiX);
-    kyoriY2 = kyori(teki[i][1],jikiY);
-    if (kyoriX2 + kyoriY2 <= 25) {
+    kyoritjX = kyori(teki[i][0],jikiX);
+    kyoritjY = kyori(teki[i][1],jikiY);
+    if (kyoritjX + kyoritjY <= 25) {
       over = 256;
     }
   }
