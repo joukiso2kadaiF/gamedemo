@@ -2,9 +2,11 @@ var canvas;
 var a;
 var over = 0;
 var ms1,ms2,keika;
-var i = 0;
+var t = 0;
 var block,shibahu;
 var h,i,j;
+var jikiOpacity,tekiopacity;
+var c = 0;
 h = 0;
 
 
@@ -163,8 +165,10 @@ function keyPressed() {
 //〜自機について〜
 var jikiX = 200;
 var jikiY = 450;
+jikiOpacity = 256;
 function jiki() {
-  fill(256,100,100,256);
+  fill(256,100,100,jikiOpacity);
+  noStroke();
   rect(jikiX,jikiY,25,25);
 }
 function movejiki() {
@@ -186,9 +190,11 @@ function movejiki() {
 //〜敵についてのデータ配列〜
 var teki = new Array();
 teki = [[25,100],[1100,650],[25,600],[1000,300]];
+tekiopacity = 256;
 
 function tekid() {
-  fill(256,256,50,256);
+  fill(256,256,50,tekiopacity);
+  noStroke();
   for (var i = 0; i < 4; i++) {
     rect(teki[i][0],teki[i][1],25,25);
   }
@@ -228,23 +234,26 @@ function moveteki2() {
     var kyoriX,kyoriY;
     kyoriX = kyori(teki[i][0],jikiX);
     kyoriY = kyori(teki[i][1],jikiY);
-    if (kyoriX < kyoriY && teki[i][1]<= jikiY) {
-      teki[i][1] += 25;
-    }else if (kyoriX < kyoriY && jikiY <= teki[i][1]) {
-      teki[i][1] -= 25;
-    }else if (kyoriY < kyoriX && teki[i][0] <= jikiX) {
-      teki[i][0] += 25;
-    }else if (kyoriY < kyoriX && jikiX <= teki[i][0]) {
-      teki[i][0] -= 25;
-    }else if (kyoriX == kyoriY) {
-      if (random == 0 && teki[i][1] <= jikiY) {
+    kyuoriU = EuclideanDistance(jikiX,jikiY,teki[i][0],teki[i][1])
+    if (kyuoriU < 600) {
+      if (kyoriX < kyoriY && teki[i][1]<= jikiY) {
         teki[i][1] += 25;
-      }else if (random == 0 && jikiY <= teki[i][1]) {
+      }else if (kyoriX < kyoriY && jikiY <= teki[i][1]) {
         teki[i][1] -= 25;
-      }else if (random == 1 && teki[i][0] <= jikiX) {
+      }else if (kyoriY < kyoriX && teki[i][0] <= jikiX) {
         teki[i][0] += 25;
-      }else if (random == 1 && jikiX <= teki[i][0]) {
+      }else if (kyoriY < kyoriX && jikiX <= teki[i][0]) {
         teki[i][0] -= 25;
+      }else if (kyoriX == kyoriY) {
+        if (random == 0 && teki[i][1] <= jikiY) {
+          teki[i][1] += 25;
+        }else if (random == 0 && jikiY <= teki[i][1]) {
+          teki[i][1] -= 25;
+        }else if (random == 1 && teki[i][0] <= jikiX) {
+          teki[i][0] += 25;
+        }else if (random == 1 && jikiX <= teki[i][0]) {
+          teki[i][0] -= 25;
+        }
       }
     }
   }
@@ -252,11 +261,11 @@ function moveteki2() {
 
 
 function timecount() {
-  if (i > 20) {
-    i = 0;
+  if (t > 20) {
+    t = 0;
     moveteki2();
   } else {
-    i += 1;
+    t += 1;
     tekid();
   }
 }
@@ -304,14 +313,26 @@ function kyori(p1,p2) {
   return Math.abs(p1 - p2);
 }
 
+//ユークリッド距離をもとめる関数
+function EuclideanDistance(x1,y1,x2,y2) {
+  return Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2));
+}
 
 //ゴールについて
 function goal(jikiX,jikiY) {
   var hairetuX2 = (jikiX/25);
   var hairetuY2 = (jikiY/25);
   if (fieldarray[h][hairetuY2][hairetuX2] == 2) {
-    h += 1;
-    positionreset();
+    if (c > 60) {
+      c = 0;
+      h += 1;
+      positionreset();
+      jikiOpacity = tekiopacity = 256;
+    }else {
+      t = 0;
+      jikiOpacity = tekiopacity = 0;
+      c += 1;
+    }
   }
 }
 
