@@ -16,7 +16,7 @@ function setup(){
   water = loadImage("picture/water2.gif");
   key = loadImage("picture/keyinwater.gif");
   locked = loadImage("picture/locked.gif");
-  stone = loadImage("picture/stone1.gif");
+  warp1 = loadImage("picture/warp2.gif");
 }
 
 function draw() {
@@ -143,7 +143,7 @@ function field() {
       }else if (fieldarray[h][i][j] == 4) {
         image(block,j*25,i*25);
       }else if (fieldarray[h][i][j] == 5) {
-        image(stone,j*25,i*25);
+        image(warp1,j*25,i*25);
       }else if (fieldarray[h][i][j] == 8) {
         image(locked,j*25,i*25);
       }else {
