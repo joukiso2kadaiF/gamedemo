@@ -16,12 +16,14 @@ function setup(){
   water = loadImage("picture/water2.gif");
   key = loadImage("picture/keyinwater.gif");
   locked = loadImage("picture/locked.gif");
+  stone = loadImage("picture/stone1.gif");
 }
 
 function draw() {
   field();    //フィールドを描画
   drawjiki();   //自機の描画
-  timecount();    //敵の移動のためのカウント。敵の動きを管理
+  timecount();  //敵の移動のためのカウント。敵の動きを管理
+  warp(jiki[h][0],jiki[h][1]);
   gameover();   //ゲームオーバーか判定
   istouchedteki();    //敵に追いつかれたか判定
   goal(jiki[h][0],jiki[h][1]);   //ゴールに到達したかどうか判定
@@ -107,7 +109,7 @@ fieldarray = [
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,4,4,3,3,4,4,4,3,3,4,4,4,4],
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,4,4,4,3,3,4,4,4,4],
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,3,3,4,4,4,3,3,4,4,4,4],
-    [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,3,3,4,4,4,4],
+    [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,3,3,4,4,4,4],
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,3,3,4,4,4,4],
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,4,4,4,4],
     [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,4,4,4,4],
@@ -128,7 +130,7 @@ fieldarray = [
 
 
 var h,i,j;
-h = 0;
+h = 2;
 function field() {
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
@@ -140,8 +142,8 @@ function field() {
         image(water,j*25,i*25);
       }else if (fieldarray[h][i][j] == 4) {
         image(block,j*25,i*25);
-      }else if (fieldarray[h][i][j] == 9) {
-        image(key,j*25,i*25);
+      }else if (fieldarray[h][i][j] == 5) {
+        image(stone,j*25,i*25);
       }else if (fieldarray[h][i][j] == 8) {
         image(locked,j*25,i*25);
       }else {
@@ -189,7 +191,7 @@ var teki = new Array();
 teki = [
         [[25,100],[1100,650],[25,600],[1000,300]],
         [[25,100],[25,650],[25,600],[1000,300]],
-        [[25,100],[1100,400],[25,600],[1000,300]]
+        [[25,100],[1200,400],[25,600],[900,300]]
        ];
 tekiopacity = 256;
 
@@ -236,7 +238,7 @@ function moveteki2() {
     kyoriX = kyori(teki[h][i][0],jiki[h][0]);
     kyoriY = kyori(teki[h][i][1],jiki[h][1]);
     kyuoriU = EuclideanDistance(jiki[h][0],jiki[h][1],teki[h][i][0],teki[h][i][1]) //敵と自機のユークリッド距離
-    if (kyuoriU < 300) {　　//ユークリッド距離が600になったら動き出す。
+    if (kyuoriU < 50) {　　//ユークリッド距離が600になったら動き出す。
       if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
         teki[h][i][1] += 25;
       }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
@@ -320,6 +322,17 @@ function EuclideanDistance(x1,y1,x2,y2) {
   return Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2));
 }
 
+function warp(jikiX,jikiY) {
+    var hairetuX3 = (jikiX/25);
+    var hairetuY3 = (jikiY/25);
+    if (fieldarray[h][hairetuY3][hairetuX3] == 8){
+      fieldarray[h][3][46] = 5;
+    }else if (fieldarray[h][hairetuY3][hairetuX3] == 5) {
+      jiki[h][0] = 375;
+      jiki[h][1] = 625;
+    }
+}
+
 //ゴールについて
 var c = 0;
 function goal(jikiX,jikiY) {
@@ -350,6 +363,7 @@ function istouchedteki() {
     }
   }
 }
+
 function gameover() {
   fill(256,50,50,over);
   rect(0,0,1250,750);
