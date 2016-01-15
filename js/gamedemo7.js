@@ -161,7 +161,7 @@ fieldarray = [
 
 
 var h,i,j;
-h = 3;
+h = 1;
 function field() {
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
