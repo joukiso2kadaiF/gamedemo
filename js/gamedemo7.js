@@ -253,33 +253,33 @@ function drawteki() {
   }
 }
 
-function moveteki() {
-  for (var i = 0; i < 4; i++) {
-    random = Math.floor(Math.random()*2);
-    var kyoriX,kyoriY;
-    kyoriX = kyori(teki[h][i][0],jiki[h][0]);
-    kyoriY = kyori(teki[h][i][1],jiki[h][1]);
-    if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
-      teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
-    }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
-      teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
-    }else if (kyoriY < kyoriX && teki[h][i][0] <= jiki[h][0]) {
-      teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
-    }else if (kyoriY < kyoriX && jiki[h][0] <= teki[h][i][0]) {
-      teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
-    }else if (kyoriX == kyoriY) {
-      if (random == 0 && teki[h][i][1] <= jiki[h][1]) {
-        teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
-      }else if (random == 0 && jiki[h][1] <= teki[h][i][1]) {
-        teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
-      }else if (random == 1 && teki[h][i][0] <= jiki[h][0]) {
-        teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
-      }else if (random == 1 && jiki[h][0] <= teki[h][i][0]) {
-        teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
-      }
-    }
-  }
-}
+// function moveteki() {
+//   for (var i = 0; i < 4; i++) {
+//     random = Math.floor(Math.random()*2);
+//     var kyoriX,kyoriY;
+//     kyoriX = kyori(teki[h][i][0],jiki[h][0]);
+//     kyoriY = kyori(teki[h][i][1],jiki[h][1]);
+//     if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
+//       teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
+//     }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
+//       teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
+//     }else if (kyoriY < kyoriX && teki[h][i][0] <= jiki[h][0]) {
+//       teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
+//     }else if (kyoriY < kyoriX && jiki[h][0] <= teki[h][i][0]) {
+//       teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
+//     }else if (kyoriX == kyoriY) {
+//       if (random == 0 && teki[h][i][1] <= jiki[h][1]) {
+//         teki[h][i][1] = ataridown(teki[h][i][0],teki[h][i][1]);
+//       }else if (random == 0 && jiki[h][1] <= teki[h][i][1]) {
+//         teki[h][i][1] = atariup(teki[h][i][0],teki[h][i][1]);
+//       }else if (random == 1 && teki[h][i][0] <= jiki[h][0]) {
+//         teki[h][i][0] = atariright(teki[h][i][0],teki[h][i][1]);
+//       }else if (random == 1 && jiki[h][0] <= teki[h][i][0]) {
+//         teki[h][i][0] = atarileft(teki[h][i][0],teki[h][i][1]);
+//       }
+//     }
+//   }
+// }
 
 function moveteki2() {
   for (var i = 0; i < 4; i++) {
@@ -478,7 +478,7 @@ function goal(jikiX,jikiY) {
   var hairetuX2 = (jikiX/25);
   var hairetuY2 = (jikiY/25);
   if (fieldarray[h][hairetuY2][hairetuX2] == 2 || fieldarray[h][hairetuY2][hairetuX2] == 7) {
-    if (c > 60) {
+    if (c > 30) {
       c = 0;
       h += 1;
       jikiOpacity = tekiopacity = 256;
