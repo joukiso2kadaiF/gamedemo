@@ -284,7 +284,7 @@ function moveteki2() {
     kyoriX = kyori(teki[h][i][0],jiki[h][0]);
     kyoriY = kyori(teki[h][i][1],jiki[h][1]);
     kyuoriU = EuclideanDistance(jiki[h][0],jiki[h][1],teki[h][i][0],teki[h][i][1]) //敵と自機のユークリッド距離
-    if (kyuoriU < 500) {　　//ユークリッド距離が600になったら動き出す。
+    if (kyuoriU < 50) {　　//ユークリッド距離が600になったら動き出す。
       if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
         teki[h][i][1] += 25;
       }else if (kyoriX < kyoriY && jiki[h][1] <= teki[h][i][1]) {
@@ -501,6 +501,18 @@ function istouchedteki() {
 function gameover() {
   fill(256,50,50,over);
   rect(0,0,1250,750);
+  fill(0,0,0,over);
+  textSize(50);
+  text("GAME OVER",450,360);
+  if (over == 256) {
+    if (c > 300) {
+      c = 0;
+      window.location.href = "gamestart.html";
+    }else {
+      t = 0;
+      c += 1;
+    }
+  }
 }
 
 function changepage(){
