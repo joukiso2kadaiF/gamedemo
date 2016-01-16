@@ -380,7 +380,7 @@ function warp(jikiX,jikiY) {
     var hairetuY3 = (jikiY/25);
     if (fieldarray[h][hairetuY3][hairetuX3] == 6){
       fieldarray[h][1][45] = 5;
-      fieldarray[h][14][20] = 3;
+      fieldarray[h][3][21] = 3;
     }else if (fieldarray[h][hairetuY3][hairetuX3] == 5) {
       jiki[h][0] = 300;
       jiki[h][1] = 600;
@@ -537,7 +537,7 @@ function changepage(){
 function kokodoko() {
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
-      if (fieldarray[h][i][j] == 99) {
+      if (fieldarray[2][i][j] == 6) {
         return "(" + j*25 + "," + i*25 + ")";
       }
     }
