@@ -164,7 +164,7 @@ fieldarray = [
 
 
 var h,i,j;
-h = 2;
+h = 0;
 function field() {
   for (var i = 0; i < 30; i++) {
     for (var j = 0; j < 50; j++) {
@@ -197,6 +197,9 @@ function field() {
 function keyTyped() {
   if (key == "w" || key == "s" || key == "a" || key == "d") {
     movejiki();
+  }
+  if (key == "p") {
+    h += 1;
   }
 }
 
