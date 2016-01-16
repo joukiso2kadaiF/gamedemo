@@ -28,6 +28,7 @@ function draw() {
   gameover();   //ゲームオーバーか判定
   istouchedteki();    //敵に追いつかれたか判定
   goal(jiki[h][0],jiki[h][1]);   //ゴールに到達したかどうか判定
+  changepage();
 }
 
 //フィールド三次配列
@@ -497,6 +498,18 @@ function istouchedteki() {
 function gameover() {
   fill(256,50,50,over);
   rect(0,0,1250,750);
+}
+
+function changepage(){
+  if (h == 3) {
+    if (c > 120) {
+      c = 0;
+      window.location.href = "clear.html";
+    }else {
+      t = 0;
+      c += 1;
+    }
+  }
 }
 
 function kokodoko() {

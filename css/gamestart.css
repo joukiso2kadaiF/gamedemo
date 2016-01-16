@@ -1,8 +1,47 @@
-body{
-    background-image:url(haikei.gif);
-    background-repeat:no-repeat;
+body {
+  background-color:#d4ed9d;
+  font-size: 100.01%;
+  font-family:serif;
+  background-image:url("picture/haikei.gif");
+  background-repeat:no-repeat;
 
 }
+div.titleposition{
+  padding-top:90px;
+  text-align:center;
+  margin:auto;
+  font-size:400%;
+  color:rgba(85, 79, 80, 0.97);
+}
+
+div.position1{
+  text-align:center;
+  margin:auto;
+}
+div.position2{
+  text-align:center;
+}
+div.position3{
+  margin-left:400px;
+}
+.button1{
+  font-size:1.4em;
+  padding:10px,30px,10px,30px;
+  font-family:serif;
+	background-color: #333;
+	color: #fff;
+}
+.button1:hover {
+  font-family:serif;
+	background-color: #59b1eb;
+}
+
 #item1{
-  
+  color:#3a5465;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.item2{
+  color:#3d3931;
 }
