@@ -201,7 +201,8 @@ function keyPressed() {
 
 //〜自機について〜
 var jiki = new Array();
-jiki = [[200,450],[25,625],[1000,675],[625,350]];
+//jiki = [[200,450],[25,625],[1000,675],[625,350]];
+jiki = [[200,450],[25,625],[300,525],[150,525]];
 jikiOpacity = 256;
 function drawjiki() {
   fill(256,100,100,jikiOpacity);
@@ -502,7 +503,7 @@ function gameover() {
 
 function changepage(){
   if (h == 3) {
-    if (c > 120) {
+    if (c > 400) {
       c = 0;
       window.location.href = "clear.html";
     }else {
