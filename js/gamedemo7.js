@@ -242,16 +242,14 @@ teki = [
 tekiopacity = 256;
 
 function drawteki() {
-  if (h == 1 || h == 3) {
-    tekiopacity = 0;
-  }
-  fill(256,256,50,tekiopacity);
-  noStroke();
-  for (var i = 0; i < 4; i++) {
-    image(tekiimage,teki[h][i][0],teki[h][i][1]);
-    //rect(teki[h][i][0],teki[h][i][1],25,25);
+  if (h != 1 && h != 3) {
+    for (var i = 0; i < 4; i++) {
+      image(tekiimage,teki[h][i][0],teki[h][i][1]);
+      //rect(teki[h][i][0],teki[h][i][1],25,25);
+    }
   }
 }
+
 
 // function moveteki() {
 //   for (var i = 0; i < 4; i++) {
@@ -290,6 +288,8 @@ function moveteki2() {
     kyuoriU = EuclideanDistance(jiki[h][0],jiki[h][1],teki[h][i][0],teki[h][i][1]) //敵と自機のユークリッド距離
     if (h == 2) {
       gamelevel = 300;
+    }else if ( h == 1 ) {
+      gamelevel = 10;
     }
     if (kyuoriU < gamelevel) {　　//ユークリッド距離が600になったら動き出す。
       if (kyoriX < kyoriY && teki[h][i][1]<= jiki[h][1]) {
