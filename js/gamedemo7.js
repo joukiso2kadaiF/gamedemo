@@ -194,8 +194,8 @@ function field() {
 }
 
 //キー押された時の動作をそれぞれ指定
-function keyPressed() {
-  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
+function keyTyped() {
+  if (key == "w" || key == "s" || key == "a" || key == "d") {
     movejiki();
   }
 }
@@ -211,16 +211,16 @@ function drawjiki() {
   rect(jiki[h][0],jiki[h][1],25,25);
 }
 function movejiki() {
-  if (keyCode === UP_ARROW) {
+  if (key == "w") {
     jiki[h][1] = atariup(jiki[h][0],jiki[h][1]);
   }
-  if (keyCode === DOWN_ARROW) {
+  if (key == "s") {
     jiki[h][1] = ataridown(jiki[h][0],jiki[h][1]);
   }
-  if (keyCode === LEFT_ARROW) {
+  if (key == "a") {
     jiki[h][0] = atarileft(jiki[h][0],jiki[h][1]);
   }
-  if (keyCode === RIGHT_ARROW) {
+  if (key == "d") {
     jiki[h][0] = atariright(jiki[h][0],jiki[h][1]);
   }
 }
