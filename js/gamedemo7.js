@@ -520,7 +520,7 @@ function gameover() {
 
 function changepage(){
   if (h == 3) {
-    if (c > 400) {
+    if (c > 180) {
       c = 0;
       window.location.href = "clear.html";
     }else {
