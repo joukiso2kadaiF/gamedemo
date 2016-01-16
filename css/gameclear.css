@@ -8,16 +8,16 @@ body{
   font-size:300%;
 }
 a{/*リンクされた文字*/
-    color:#b0d553;
+    color:rgba(174, 194, 192, 0.89);
     font-style:normal;
     text-decoration:underline;
 }
 a:visited {/*訪問後のリンク*/
-    color:#63b75d;
+    color:rgba(174, 194, 192, 0.89);
     text-decoration:underline;
 }
 a:hover {/*マウスをのせたとき*/
-    color:#ff4b68;
+    color:rgba(5, 245, 230, 0.9);
     font-style:normal;
     text-decoration:underline;
 }
