@@ -1,0 +1,23 @@
+body{
+  background-color:#217756;
+  font-family:serif;
+}
+.gameclear{
+  text-align:center;
+  color:#fced25;
+  font-size:300%;
+}
+a{/*リンクされた文字*/
+    color:#b0d553;
+    font-style:normal;
+    text-decoration:underline;
+}
+a:visited {/*訪問後のリンク*/
+    color:#63b75d;
+    text-decoration:underline;
+}
+a:hover {/*マウスをのせたとき*/
+    color:#ff4b68;
+    font-style:normal;
+    text-decoration:underline;
+}
