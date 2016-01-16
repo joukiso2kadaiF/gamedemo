@@ -21,7 +21,7 @@ function setup(){
   tekiimage = loadImage("picture/teki.gif")
 }
 
-function draw() {
+function draw() {//1秒間６０回でdraw内の関数を呼び出す
   field();    //フィールドを描画
   drawjiki();   //自機の描画
   timecount();  //敵の移動のためのカウント。敵の動きを管理
