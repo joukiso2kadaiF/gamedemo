@@ -18,6 +18,7 @@ function setup(){
   locked = loadImage("picture/locked.gif");
   warp1 = loadImage("picture/warp2.gif");
   goal2 = loadImage("picture/goalw.gif")
+  tekiimage = loadImage("picture/teki.gif")
 }
 
 function draw() {
@@ -243,7 +244,8 @@ function drawteki() {
   fill(256,256,50,tekiopacity);
   noStroke();
   for (var i = 0; i < 4; i++) {
-    rect(teki[h][i][0],teki[h][i][1],25,25);
+    image(tekiimage,teki[h][i][0],teki[h][i][1]);
+    //rect(teki[h][i][0],teki[h][i][1],25,25);
   }
 }
 
